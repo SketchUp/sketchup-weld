@@ -1,77 +1,32 @@
-# VSCode Project for SketchUp Extension Development
+# Example Extension for testing SketchUp's Weld
 
-This is a boiler plate example project for setting up a VSCode project for SketchUp extension development.
+This expose `Sketchup::Entities#weld` to the SketchUp UI via a context menu
+if the user has edges selected.
 
-Key features of this setup:
+## Debugging Tools
 
-* When opening the project in VSCode you will be presented with a recommended set of VSCode extensions if you are missing any.
-* Configured for Ruby auto-complete and code insight.
-* SketchUp Ruby API supported in auto-complete.
-* VSCode tasks for debugging Ruby source in SketchUp.
-* Inline static analysis powered by RuboCop and RuboCop SketchUp.
+A set of debugging tools is found under `Extensions > Weld Debug`.
 
-![](https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/images/VSCode/VSCodeSolargraphAutoComplete.png)
+### Count Curves
 
-## Prerequisites
+Counts the number of curves found in the current context.
 
-* Standalone Ruby installed on your development system. See [rubocop-sketchup manual](https://rubocop-sketchup.readthedocs.io/en/stable/installation/) for more details.
-* The [Bundler gem](http://bundler.io/) to manage gem dependencies.
+### Colorize Curves
 
-## Getting started
+Assigns a unique color to each curve for easier visual identification.
 
-1. Clone the project to your machine.
-2. From the command line install the require gem dependencies: `bundle install`
-3. Start coding!
+### Mark Curve Endpoints
 
-## Configuration
+Adds guide points and guide lines at the start and end of curves.
 
-You might want to review the various configuration files to fit your project needs:
+For open ended curves the start will be marked with a guide line with long
+dashes. The end will have dots.
 
-### `.rubocop.yml`
+For closed curves the start and end is the same point and marked with a guide
+line with dashes and dots.
 
-Configure what RuboCop should look for when analyzing your project. There are comments inline in the configuration file offering some help with what is pre-configured. For more details refer to the  [rubocop-sketchup manual](https://rubocop-sketchup.readthedocs.io/en/stable/).
+### Validate Model
 
-### `.solargraph.yml`
-
-You might want to update the `require_paths` to reflect one of your SketchUp installation paths to ensure Solargraph is able to provide full auto-complete for the SketchUp API.
-
-### `.vscode/tasks.json`
-
-Add/remove task launchers for relevant SketchUp versions. Follow the pattern for the existing launchers.
-
-### `.editorconfig`
-
-You might want to adjust this configuration file to suit your own coding style. This file is a [generic config file](https://editorconfig.org/) supported by many code editors.
-
-## How To
-
-### Debug in SketchUp
-
-![](https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/images/VSCode/VSCodeDebugging.gif)
-
-**Note:** _Make sure you have [installed the required debugger](https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/VSCode-Debugger-Setup#preparing-sketchup) dll/dylib to enable debugging in SketchUp._
-
-You also need to make sure you are [loading the extension](https://github.com/SketchUp/sketchup-ruby-api-tutorials#loading-directly-from-the-repository) directly from your project's directory.
-
-A visual guide is available in our [tutorials repository](https://code.visualstudio.com/docs/editor/debugging).
-
-The short version is condensed here:
-
-1. Set break points in the gutter bar next to the line numbers in the editor.
-2. `View > Command Palette` (`Ctrl+Shift+P`)
-3. Start typing `task`
-4. Pick `Tasks: Run Task`
-5. Pick `Debug in SketchUp 2018`
-6. Wait for SketchUp to launch.
-7. Go to the Debug tab in VSCode (`Ctrl+Shift+D`)
-8. Pick `Listen for rdebug-ide` in the drop-down.
-9. Click the `Start Debugging` button.
-
-More details: https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki/VSCode-Debugger-Setup
-
-## Further Reading
-
-For the latest information on setting up rubocop-sketchup integration with VSCode, refer to:
-
-* https://rubocop-sketchup.readthedocs.io/en/stable/integration_with_other_tools/
-* https://github.com/SketchUp/sketchup-ruby-api-tutorials/wiki
+Triggers the Check Validity of the model. (With the mac build of SketchUp this
+will open the `Model Info > Statistics` dialog and `Fix Problems` must be
+invoked manually.)

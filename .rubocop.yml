@@ -18,12 +18,12 @@ AllCops:
   - src/*/vendor/**/* # Exclude skippy vendor folder
   SketchUp:
     SourcePath: src
-    TargetSketchUpVersion: 2014
+    TargetSketchUpVersion: 2020.0 # TODO: Should be 2020.1
     Exclude: # Exclude common folders.
     - profiling/
     - skippy/
     - tests/
-  TargetRubyVersion: 2.2 # Should have been 2.0 but RuboCop dropped support.
+  TargetRubyVersion: 2.5
 
 
 # If DisabledByDefault is set to true then we need to enable the SketchUp
