@@ -130,7 +130,7 @@ module Examples
       plugins_menu = UI.menu('Plugins')
       menu = plugins_menu.add_submenu('Weld Debug')
       menu.add_item('Count Curves') { count_curves }
-      menu.add_item('Count Curves') { dump_pids }
+      menu.add_item('Dump PIDs') { dump_pids }
       menu.add_item('Colors Curves') { colorize_curves }
       menu.add_item('Mark Curve Endpoints') { mark_curve_ends }
       menu.add_item('Mark Edge PIDS') { mark_edge_pids }
