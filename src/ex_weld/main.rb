@@ -36,6 +36,22 @@ module Examples
       UI.messagebox(message)
     end
 
+    def dump_pids
+      model = Sketchup.active_model
+      entities = model.active_entities
+      edges = entities.grep(Sketchup::Edge)
+      curves = edges.map(&:curve).flatten.uniq.compact
+      return if curves.empty?
+      SKETCHUP_CONSOLE.show
+      curves.each { |curve|
+        puts
+        puts "#{curve.persistent_id} (#{curve.vertices.first.position.inspect})"
+        curve.edges.each { |edge|
+          puts "  #{edge.persistent_id}"
+        }
+      }
+    end
+
     def self.colorize_curves
       model = Sketchup.active_model
       entities = model.active_entities
@@ -114,6 +130,7 @@ module Examples
       plugins_menu = UI.menu('Plugins')
       menu = plugins_menu.add_submenu('Weld Debug')
       menu.add_item('Count Curves') { count_curves }
+      menu.add_item('Count Curves') { dump_pids }
       menu.add_item('Colors Curves') { colorize_curves }
       menu.add_item('Mark Curve Endpoints') { mark_curve_ends }
       menu.add_item('Mark Edge PIDS') { mark_edge_pids }
