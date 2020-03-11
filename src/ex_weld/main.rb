@@ -81,7 +81,22 @@ module Examples
         cline.stipple = STIPPLE_DOTTED
       }
       model.commit_operation
-      # TODO: ...
+    end
+
+    def self.mark_edge_pids
+      model = Sketchup.active_model
+      entities = model.active_entities
+      edges = entities.grep(Sketchup::Edge)
+      return if edges.empty?
+
+      model.start_operation('Mark Edge PIDs', true)
+      edges.each { |edge|
+        pt1, pt2 = edge.vertices.map(&:position)
+        mid = Geom.linear_combination(0.5, pt1, 0.5, pt2)
+        text = entities.add_text(edge.persistent_id.to_s, mid, [0, 0, 500.mm])
+        text.material = 'orange'
+      }
+      model.commit_operation
     end
 
     def self.validate_model
@@ -101,6 +116,7 @@ module Examples
       menu.add_item('Count Curves') { count_curves }
       menu.add_item('Colors Curves') { colorize_curves }
       menu.add_item('Mark Curve Endpoints') { mark_curve_ends }
+      menu.add_item('Mark Edge PIDS') { mark_edge_pids }
       menu.add_item('Validate Model') { validate_model }
 
       UI.add_context_menu_handler do |context_menu|
