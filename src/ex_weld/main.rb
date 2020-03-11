@@ -36,7 +36,7 @@ module Examples
       UI.messagebox(message)
     end
 
-    def dump_pids
+    def self.dump_pids
       model = Sketchup.active_model
       entities = model.active_entities
       edges = entities.grep(Sketchup::Edge)
